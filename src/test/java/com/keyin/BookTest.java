@@ -7,12 +7,12 @@ public class BookTest {
     @Test
     public void testBookAvailability() {
         Book book = new Book("1984", "George Orwell", "GO0001");
-
+        User user = new User("John Doe", "JD0100");
 //        Any new book is available by default
         Assertions.assertTrue(book.isAvailable(), "Any new book added is by default available");
 
 //        Borrowing changes its availability to false
-        book.borrowedBook();
+        book.borrowedBook(user);
         Assertions.assertFalse(book.isAvailable(), "Book should be unavailable after borrowing.");
 
 //        Return of a book changes it's status to true

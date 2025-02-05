@@ -30,7 +30,7 @@ public class User {
         }
         if (book.isAvailable()) {
             borrowedBooks.add(book);
-            book.borrowedBook();
+            book.borrowedBook(this);
         } else {
             throw new IllegalStateException("This book is already borrowed.");
         }
