@@ -31,7 +31,7 @@ public class Book {
         return this.isAvailable;
     }
 
-    public void borrowBook() {
+    public void borrowedBook() {
         if (isAvailable) {
             isAvailable = false;
         } else {
@@ -39,7 +39,7 @@ public class Book {
         }
     }
 
-    public void returnBook() {
+    public void returnedBook() {
         if (!isAvailable) {
             isAvailable = true;
         } else {

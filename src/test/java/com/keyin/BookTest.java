@@ -12,11 +12,11 @@ public class BookTest {
         Assertions.assertTrue(book.isAvailable(), "Any new book added is by default available");
 
 //        Borrowing changes its availability to false
-        book.borrowBook();
+        book.borrowedBook();
         Assertions.assertFalse(book.isAvailable(), "Book should be unavailable after borrowing.");
 
 //        Return of a book changes it's status to true
-        book.returnBook();
+        book.returnedBook();
         Assertions.assertTrue(book.isAvailable(), "Book should be available after a return");
     }
 }
