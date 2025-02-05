@@ -7,7 +7,7 @@ public class User {
     private String fullName;
     private String userID;
     private List<Book> borrowedBooks;
-    private int MaxBorrowLimit = 3;
+    private static final int MaxBorrowLimit = 3;
 
     public User(String fullName, String userID) {
         this.fullName = fullName;
@@ -24,15 +24,16 @@ public class User {
         return this.userID;
     }
 
+    public boolean canBorrow() {
+        return borrowedBooks.size() < MaxBorrowLimit;  // Check if the user can borrow more books
+    }
+
     public void borrowBook(Book book) {
-        if (borrowedBooks.size() >= MaxBorrowLimit) {
-            throw new IllegalStateException("User has already borrowed the maximum number of books.");
-        }
-        if (book.isAvailable()) {
+        if (canBorrow()) {
             borrowedBooks.add(book);
             book.borrowedBook(this);
         } else {
-            throw new IllegalStateException("This book is already borrowed.");
+            throw new IllegalStateException("Borrowing limit exceeded.");
         }
     }
 
@@ -41,7 +42,7 @@ public class User {
             borrowedBooks.remove(book);
             book.returnedBook();
         } else {
-            throw new IllegalStateException("This book is already borrowed.");
+            throw new IllegalStateException("Book was not borrowed by this user.");
         }
     }
 
