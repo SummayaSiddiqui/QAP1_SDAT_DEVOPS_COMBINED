@@ -31,9 +31,20 @@ public class Book {
         return this.isAvailable;
     }
 
-    //    Setter
-    public void setAvailable(boolean available) {
-        this.isAvailable = available;
+    public void borrowBook() {
+        if (isAvailable) {
+            isAvailable = false;
+        } else {
+            throw new IllegalStateException("Book is already borrowed");
+        }
+    }
+
+    public void returnBook() {
+        if (!isAvailable) {
+            isAvailable = true;
+        } else {
+            throw new IllegalStateException("Book is already available");
+        }
     }
 
     @Override
