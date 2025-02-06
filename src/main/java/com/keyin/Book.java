@@ -18,15 +18,15 @@ public class Book {
 
     //    Getters
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     public String getAuthor() {
-        return this.author;
+        return author;
     }
 
     public String getIsbn() {
-        return this.isbn;
+        return isbn;
     }
 
     public User getBorrowedBy() {
@@ -37,7 +37,8 @@ public class Book {
         return this.isAvailable;
     }
 
-    public void borrowedBook(User user) {
+//    Borrowing logic
+    public void borrowBook(User user) {
         if (isAvailable) {
             isAvailable = false;
             this.borrowedBy = user;
@@ -46,7 +47,7 @@ public class Book {
         }
     }
 
-    public void returnedBook() {
+    public void returnBook() {
         if (!isAvailable) {
             isAvailable = true;
             this.borrowedBy = null;

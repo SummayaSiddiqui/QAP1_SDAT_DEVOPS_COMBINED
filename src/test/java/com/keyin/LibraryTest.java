@@ -21,6 +21,7 @@ public class LibraryTest {
     @Test
     public void testSearchByTitle() {
         List<Book> result = library.searchBooks("1984");
+        Assertions.assertFalse(result.isEmpty(), "Search should return at least one result.");
         Assertions.assertEquals("1984", result.get(0).getTitle());
     }
 
@@ -34,7 +35,7 @@ public class LibraryTest {
     @Test
     public void testSearchByIsbn() {
         List<Book> result = library.searchBooks("SF0001");
-        Assertions.assertEquals(1, result.size(), "Should find one book by Idbn.");
+        Assertions.assertEquals(1, result.size(), "Should find one book by ISBN.");
         Assertions.assertEquals("The Great Gatsby", result.get(0).getTitle());
     }
 
