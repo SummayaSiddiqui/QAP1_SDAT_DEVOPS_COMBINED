@@ -48,4 +48,25 @@ public class UserTest {
         user.returnBook(book1);
         Assertions.assertEquals(0, user.getBorrowedBooks().size(), "User should have 0 books after returning.");
     }
+
+    @Test
+    public void userCannotBorrowSameBookTwice() {
+        User user = new User("John Doe", "JD0100");
+        Book book = new Book("1984", "George Orwell", "GO0001");
+
+        user.borrowBook(book);
+
+        IllegalStateException exception = Assertions.assertThrows(IllegalStateException.class, () -> user.borrowBook(book));
+        Assertions.assertEquals("User already borrowed this book.", exception.getMessage());
+    }
+
+    @Test
+    public void userCannotReturnUnborrowedBook() {
+        User user = new User("John Doe", "JD0100");
+        Book book = new Book("1984", "George Orwell", "GO0001");
+
+        IllegalStateException exception = Assertions.assertThrows(IllegalStateException.class, () -> user.returnBook(book));
+        Assertions.assertEquals("User did not borrow this book.", exception.getMessage());
+    }
+
 }
