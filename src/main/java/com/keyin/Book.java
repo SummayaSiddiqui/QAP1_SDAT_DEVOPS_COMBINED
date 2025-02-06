@@ -51,7 +51,7 @@ public class Book {
             isAvailable = true;
             this.borrowedBy = null;
         } else {
-            throw new IllegalStateException("Book is already available.");
+            throw new IllegalStateException("Book was not borrowed.");
         }
     }
 
