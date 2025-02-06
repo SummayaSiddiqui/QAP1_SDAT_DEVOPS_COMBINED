@@ -2,6 +2,7 @@ package com.keyin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Library {
     private final List<Book> books;
@@ -15,30 +16,23 @@ public class Library {
     }
 
     public List<Book> searchBooks(String query) {
-        List<Book> results = new ArrayList<>();
         String lowercaseQuery = query.toLowerCase();
-
-        for (Book book : books) {
-            if (matchesTitle(book, lowercaseQuery) ||
-                    matchesAuthor(book, lowercaseQuery) ||
-                    matchesIsbn(book, query)) {
-                results.add(book);
-            }
-        }
-
-        return results;
+        return books.stream()
+                .filter(book -> titleMatches(book, lowercaseQuery) ||
+                        authorMatches(book, lowercaseQuery) ||
+                        isbnMatches(book, query))
+                .collect(Collectors.toList());
     }
 
-    private boolean matchesTitle (Book book, String lowercaseQuery){
-        return book.getTitle().toLowerCase().contains(lowercaseQuery);
+    private boolean titleMatches(Book book, String query) {
+        return book.getTitle().toLowerCase().contains(query);
     }
 
-    private boolean matchesAuthor (Book book, String lowercaseQuery){
-        return book.getAuthor().toLowerCase().contains(lowercaseQuery);
+    private boolean authorMatches(Book book, String query) {
+        return book.getAuthor().toLowerCase().contains(query);
     }
 
-    private boolean matchesIsbn (Book book, String query){
+    private boolean isbnMatches(Book book, String query) {
         return book.getIsbn().equalsIgnoreCase(query);
     }
 }
-
